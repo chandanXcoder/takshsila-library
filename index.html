@@ -1,36 +1,15 @@
- # Create project files for a professional self-study library website
-
-import os, zipfile, textwrap, json, shutil, pathlib
-
-project_dir = "/mnt/data/self-study-library"
-assets_dir = os.path.join(project_dir, "assets")
-os.makedirs(assets_dir, exist_ok=True)
-
-# Copy provided image if exists
-src_image = "/mnt/data/library.jpg"
-dst_image = os.path.join(assets_dir, "library.jpg")
-if os.path.exists(src_image):
-    shutil.copy(src_image, dst_image)
-
-index_html = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Oxy Reading Zone – Self Study Library</title>
-  <meta name="description" content="Peaceful self-study library with AC halls, free unlimited Wi-Fi, 250 seats, dedicated dark rooms, clean washrooms, and flexible monthly plans." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="Oxy Reading Zone">
-        <svg viewBox="0 0 24 24" aria-hidden="true" class="brand-icon"><path d="M3 5h18v2H3zM3 9h18v10H3z"></path><path d="M7 12h5v2H7zM7 15h10v2H7z"></path></svg>
-        <span>Oxy Reading Zone</span>
-      </a>
+      <a class="brand" href="#home">📘 Oxy Reading Zone</a>
       <nav class="nav">
         <a href="#features">Features</a>
         <a href="#pricing">Fees</a>
@@ -46,355 +25,72 @@ index_html = """<!DOCTYPE html>
       <div class="container hero-grid">
         <div class="hero-copy">
           <h1>Your Silent, Focused Self-Study Library</h1>
-          <p>Air-conditioned halls, <strong>free unlimited Wi-Fi</strong>, <strong>250 seats</strong>, dedicated <strong>dark rooms</strong>, CCTV surveillance, and hygienic washrooms—everything you need to stay consistent.</p>
+          <p>Air-conditioned halls, <strong>free unlimited Wi-Fi</strong>, <strong>250 seats</strong>, dedicated <strong>dark rooms</strong>, CCTV surveillance, and hygienic washrooms.</p>
           <div class="hero-cta">
             <a class="btn primary" href="#pricing">See Monthly Fees</a>
             <a class="btn ghost" href="#features">Explore Features</a>
           </div>
-          <ul class="badges">
-            <li>Open Daily • 8 AM – 10 PM</li>
-            <li>Calm • Clean • Comfortable</li>
-          </ul>
         </div>
         <div class="hero-media">
-          <div class="media-card">
-            <img src="assets/library.jpg" alt="Study library photo" onerror="this.style.display='none'">
-          </div>
+          <img src="assets/library.jpg" alt="Study library photo">
         </div>
       </div>
     </section>
 
+    <!-- Features -->
     <section id="features" class="section">
       <div class="container">
         <h2 class="section-title">Facilities & Features</h2>
         <div class="grid features-grid">
-          <div class="card feature"><span class="icon">🔒</span><h3>Personal Cabin (Locker)</h3><p>Secure lockers and individual desk space for uninterrupted study.</p></div>
-          <div class="card feature"><span class="icon">🪑</span><h3>Comfortable Seating</h3><p>Ergonomic chairs with proper back support for long hours.</p></div>
-          <div class="card feature"><span class="icon">💡</span><h3>Study Lamps</h3><p>Each desk has a bright, focused lamp to protect your eyes.</p></div>
-          <div class="card feature"><span class="icon">📶</span><h3>Free Unlimited Wi-Fi</h3><p>High-speed internet for research, classes, and downloads.</p></div>
-          <div class="card feature"><span class="icon">🗞️</span><h3>News Zone</h3><p>Daily newspapers and magazines for current affairs.</p></div>
-          <div class="card feature"><span class="icon">🤫</span><h3>Silent & Hygienic</h3><p>Strict silence policy and frequent cleaning.</p></div>
-          <div class="card feature"><span class="icon">🔌</span><h3>Charging Points</h3><p>Multiple sockets at every row for laptops & phones.</p></div>
-          <div class="card feature"><span class="icon">🎥</span><h3>CCTV Surveillance</h3><p>24×7 monitoring for safety and discipline.</p></div>
-          <div class="card feature"><span class="icon">🥗</span><h3>Lunch Corner</h3><p>Designated area to eat without disturbing others.</p></div>
-          <div class="card feature"><span class="icon">🚰</span><h3>RO Drinking Water</h3><p>Safe, chilled water available throughout the day.</p></div>
-          <div class="card feature"><span class="icon">🚻</span><h3>Washrooms</h3><p>Clean toilets and bathrooms are available on-site.</p></div>
-          <div class="card feature"><span class="icon">🌳</span><h3>Nearby Parks & Cafés</h3><p>Take short breaks and reset your focus.</p></div>
+          <div class="card">🔒 Personal Cabin with Locker</div>
+          <div class="card">🪑 Comfortable Chair</div>
+          <div class="card">💡 Study Lamp</div>
+          <div class="card">📶 Free Unlimited Wi-Fi</div>
+          <div class="card">🤫 Silent & Hygienic</div>
+          <div class="card">🔌 Charging Points</div>
+          <div class="card">🎥 CCTV Surveillance</div>
+          <div class="card">🚻 Washrooms & Bathrooms</div>
+          <div class="card">🌳 Nearby Parks & Mess</div>
         </div>
       </div>
     </section>
 
+    <!-- Pricing -->
     <section id="pricing" class="section alt">
       <div class="container">
         <h2 class="section-title">Monthly Fees</h2>
-        <p class="section-intro">Transparent pricing with simple plans. AC hall access is standard. Dark room fees are separate.</p>
-
-        <div class="pricing-wrap">
-          <div class="pricing-cards" id="pricingCards">
-            <!-- Cards will be injected by JS from data below -->
-          </div>
-          <p class="note">* All plans include AC seating (where applicable), free unlimited Wi-Fi, and access to RO water & washrooms. Dark room has a different fee.</p>
-        </div>
+        <div class="pricing-cards" id="pricingCards"></div>
+        <p class="note">* Dark room fees are separate.</p>
       </div>
     </section>
 
+    <!-- Seats -->
     <section id="seats" class="section">
       <div class="container">
-        <div class="capacity card">
-          <div>
-            <h2>Seat Capacity</h2>
-            <p>We currently offer <strong>250 seats</strong> across AC halls and cabins. Reserve early to secure your preferred spot.</p>
-          </div>
-          <div class="capacity-meter" aria-label="Seat capacity">
-            <div class="meter-bar" style="width: 100%"></div>
-            <span class="meter-label">250 Seats</span>
-          </div>
-        </div>
+        <h2>Seat Capacity</h2>
+        <p>We currently offer <strong>250 seats</strong>. Reserve early to secure your preferred spot.</p>
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact" class="section alt">
-      <div class="container contact-grid">
-        <div>
-          <h2 class="section-title">Contact & Location</h2>
-          <p>Have questions or ready to join? Send us a message and we’ll get back to you shortly.</p>
-          <ul class="contact-list">
-            <li>📍 Smriti Nagar, Bhilai (C.G.)</li>
-            <li>🕘 Timing: 8:00 AM – 10:00 PM</li>
-            <li>📧 Email: <a href="mailto:hello@oxyreadingzone.in">hello@oxyreadingzone.in</a></li>
-            <li>📞 Phone: <a href="tel:+919999999999">+91 99999 99999</a></li>
-          </ul>
-        </div>
-        <form class="card contact-form" id="contactForm">
-          <label>
-            Name
-            <input type="text" name="name" placeholder="Your name" required>
-          </label>
-          <label>
-            Phone / Email
-            <input type="text" name="contact" placeholder="Your phone or email" required>
-          </label>
-          <label>
-            Message
-            <textarea name="message" rows="4" placeholder="I'm interested in a monthly plan..."></textarea>
-          </label>
-          <button type="submit" class="btn primary">Send Enquiry</button>
-          <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
-        </form>
+      <div class="container">
+        <h2 class="section-title">Contact & Location</h2>
+        <ul>
+          <li>📍 Smriti Nagar, Bhilai (C.G.)</li>
+          <li>🕘 8:00 AM – 10:00 PM</li>
+          <li>📞 +91 99999 99999</li>
+        </ul>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
+    <div class="container">
       <p>© <span id="year"></span> Oxy Reading Zone • All rights reserved.</p>
-      <a href="#home" class="btn small ghost">Back to top ↑</a>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-"""
-
-styles_css = """/* ---------- Root & Reset ---------- */
-:root{
-  --bg:#0b1220;
-  --card:#0f1a30;
-  --muted:#8ea3b0;
-  --text:#e8eef5;
-  --brand:#43b0ff;
-  --brand-2:#7cf0bd;
-  --ring: rgba(67,176,255,.35);
-  --shadow: 0 10px 30px rgba(0,0,0,.25);
-}
-
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Noto Sans Devanagari", sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 600px at -10% -10%, rgba(124,240,189,.15), transparent 60%),
-    radial-gradient(1000px 800px at 110% 10%, rgba(67,176,255,.12), transparent 60%),
-    var(--bg);
-  line-height:1.6;
-}
-
-img{max-width:100%; display:block}
-a{color:var(--brand); text-decoration:none}
-a:hover{text-decoration:underline}
-
-.container{max-width:1120px; margin-inline:auto; padding:0 1.2rem}
-
-/* ---------- Header ---------- */
-.site-header{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(1.2) blur(10px);
-  background:rgba(11,18,32,.7);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.header-inner{
-  display:flex; align-items:center; gap:1rem; padding:.8rem 0;
-}
-.brand{display:flex; align-items:center; gap:.6rem; font-weight:700; color:var(--text)}
-.brand-icon{width:28px; height:28px; fill:var(--brand)}
-.nav{margin-left:auto; display:flex; gap:1rem; flex-wrap:wrap}
-.nav a{color:var(--muted); font-weight:500}
-.nav a:hover{color:var(--text)}
-
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:.8rem 1rem; border-radius:14px; border:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  color:var(--text); cursor:pointer; transition:transform .06s ease, box-shadow .2s ease;
-  box-shadow:0 4px 14px rgba(0,0,0,.2);
-}
-.btn.small{padding:.55rem .8rem; font-size:.9rem}
-.btn.primary{
-  background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#04121a; font-weight:700; border:0;
-  box-shadow:0 10px 24px rgba(67,176,255,.35), 0 16px 40px rgba(124,240,189,.25);
-}
-.btn.ghost{background:transparent; border:1px solid rgba(255,255,255,.14); color:var(--text)}
-.btn:active{transform:translateY(1px)}
-
-/* ---------- Hero ---------- */
-.hero{padding:5rem 0 3rem}
-.hero-grid{display:grid; grid-template-columns:1.2fr .9fr; gap:2rem; align-items:center}
-.hero h1{font-size: clamp(2rem, 3.6vw, 3rem); line-height:1.15; margin:.2rem 0 1rem}
-.hero p{color:var(--muted); font-size:1.05rem}
-.hero-cta{display:flex; gap:1rem; margin:1.2rem 0 1rem; flex-wrap:wrap}
-.badges{display:flex; gap:1rem; padding:0; margin:1rem 0 0; list-style:none; color:#b8c6d1; font-size:.95rem}
-.media-card{
-  border:1px solid rgba(255,255,255,.08); border-radius:18px; overflow:hidden; background:var(--card); box-shadow:var(--shadow);
-  aspect-ratio: 4 / 3; display:flex; align-items:center; justify-content:center;
-}
-.media-card img{width:100%; height:100%; object-fit:cover}
-
-/* ---------- Sections ---------- */
-.section{padding:4rem 0}
-.section.alt{background:radial-gradient(800px 400px at 10% 10%, rgba(67,176,255,.08), transparent 60%);}
-.section-title{font-size: clamp(1.6rem, 3vw, 2.2rem); margin:0 0 1rem}
-.section-intro{color:var(--muted); margin:.4rem 0 2rem}
-
-.grid{display:grid; gap:1rem}
-.features-grid{grid-template-columns: repeat(3, minmax(0,1fr))}
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px; padding:1.2rem; box-shadow:var(--shadow);
-}
-.feature .icon{font-size:1.4rem; display:inline-block; margin-bottom:.4rem}
-.feature h3{margin:.2rem 0 .3rem; font-size:1.1rem}
-.feature p{color:var(--muted); font-size:.97rem}
-
-/* ---------- Pricing ---------- */
-.pricing-wrap{display:flex; flex-direction:column; gap:1rem}
-.pricing-cards{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:1rem}
-.price-card{position:relative; padding:1.4rem}
-.price-card .title{font-weight:700; font-size:1.1rem}
-.price{font-size:2rem; font-weight:800; margin:.4rem 0}
-.price small{font-weight:600; opacity:.9}
-.includes{margin:.6rem 0 1rem; padding-left:1rem; color:var(--muted)}
-.includes li{margin:.25rem 0}
-.tag{
-  position:absolute; top:10px; right:10px; font-size:.8rem; padding:.25rem .5rem; border-radius:999px;
-  border:1px solid rgba(255,255,255,.16); color:#cde9ff; background:rgba(67,176,255,.12)
-}
-.note{color:#9db0bd; font-size:.95rem}
-
-/* ---------- Seats ---------- */
-.capacity{display:flex; align-items:center; justify-content:space-between; gap:1.2rem}
-.capacity-meter{position:relative; flex:0 0 260px; background:#0b1628; border:1px solid rgba(255,255,255,.08); border-radius:999px; height:18px}
-.meter-bar{height:100%; border-radius:999px; background:linear-gradient(90deg, var(--brand), var(--brand-2))}
-.meter-label{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:700; color:#04121a}
-
-/* ---------- Contact ---------- */
-.contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:1.5rem}
-.contact-list{list-style:none; padding:0; margin:1rem 0; color:#c2d0da}
-.contact-list li{margin:.4rem 0}
-.contact-form label{display:block; font-weight:600; margin:.4rem 0 .2rem}
-.contact-form input, .contact-form textarea{
-  width:100%; padding:.8rem .9rem; border-radius:12px; border:1px solid rgba(255,255,255,.12);
-  background:#0b1628; color:var(--text); outline:none;
-}
-.contact-form input:focus, .contact-form textarea:focus{box-shadow:0 0 0 4px var(--ring); border-color:transparent}
-
-/* ---------- Footer ---------- */
-.site-footer{border-top:1px solid rgba(255,255,255,.08); padding:1.5rem 0; color:#9db0bd}
-.footer-inner{display:flex; align-items:center; justify-content:space-between}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 980px){
-  .hero-grid{grid-template-columns:1fr}
-  .features-grid{grid-template-columns: repeat(2, minmax(0,1fr))}
-  .pricing-cards{grid-template-columns: repeat(2, minmax(0,1fr))}
-  .contact-grid{grid-template-columns: 1fr}
-}
-@media (max-width: 640px){
-  .nav{display:none}
-  .features-grid{grid-template-columns:1fr}
-  .pricing-cards{grid-template-columns:1fr}
-  .capacity{flex-direction:column; align-items:stretch}
-  .capacity-meter{width:100%}
-}
-"""
-
-script_js = """// ---------- Dynamic Pricing Data (Edit here) ----------
-const PLANS = [
-  {
-    id: 'open-ac',
-    title: 'AC Open Hall – Monthly',
-    price: 1800, // ₹ per month
-    unit: 'month',
-    tag: 'Popular',
-    includes: [
-      'AC common study hall access',
-      'Free unlimited Wi-Fi',
-      'RO water & hygienic washrooms',
-      'Personal locker (optional add-on)'
-    ]
-  },
-  {
-    id: 'cabin',
-    title: 'Personal Cabin – Monthly',
-    price: 3000,
-    unit: 'month',
-    tag: 'Focus+',
-    includes: [
-      'Cabin seat with privacy',
-      'Free unlimited Wi-Fi',
-      'Locker included',
-      'Priority charging points'
-    ]
-  },
-  {
-    id: 'dark-room',
-    title: 'Dark Room – Monthly',
-    price: 1500,
-    unit: 'month',
-    tag: 'Different Charge',
-    includes: [
-      'Low-light room for screen-free study',
-      'Limited seats • separate fee',
-      'Free Wi-Fi (in lobby)',
-      'RO water & washrooms'
-    ]
-  }
-];
-
-// ---------- Render Pricing Cards ----------
-const pricingContainer = document.getElementById('pricingCards');
-if (pricingContainer){
-  PLANS.forEach(p => {
-    const el = document.createElement('article');
-    el.className = 'card price-card';
-    el.innerHTML = `
-      <span class="tag">${p.tag}</span>
-      <div class="title">${p.title}</div>
-      <div class="price">₹${p.price.toLocaleString('en-IN')} <small>/${p.unit}</small></div>
-      <ul class="includes">${p.includes.map(i=>`<li>• ${i}</li>`).join('')}</ul>
-      <button class="btn primary small" aria-label="Select ${p.title}">Choose Plan</button>
-    `;
-    pricingContainer.appendChild(el);
-  });
-}
-
-// ---------- Simple Contact Form (no backend) ----------
-const form = document.getElementById('contactForm');
-const note = document.getElementById('formNote');
-if (form){
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const info = Object.fromEntries(data.entries());
-    note.textContent = 'Thanks! Your enquiry has been noted. We will contact you shortly.';
-    form.reset();
-    // You can connect this to a backend later:
-    console.log('Enquiry:', info);
-  });
-}
-
-// ---------- Footer Year ----------
-document.getElementById('year').textContent = new Date().getFullYear();
-"""
-
-# Write files
-with open(os.path.join(project_dir, "index.html"), "w", encoding="utf-8") as f:
-    f.write(index_html)
-with open(os.path.join(project_dir, "styles.css"), "w", encoding="utf-8") as f:
-    f.write(styles_css)
-with open(os.path.join(project_dir, "script.js"), "w", encoding="utf-8") as f:
-    f.write(script_js)
-
-# Zip the project
-zip_path = "/mnt/data/self-study-library.zip"
-with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
-    for root, _, files in os.walk(project_dir):
-        for name in files:
-            file_path = os.path.join(root, name)
-            arcname = os.path.relpath(file_path, project_dir)
-            zipf.write(file_path, arcname)
-
-project_dir, zip_path

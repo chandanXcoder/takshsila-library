@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: #e8eef5;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.site-header {
+  background: #0f1a30;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.nav a {
+  margin: 0 10px;
+  color: #8ea3b0;
+  text-decoration: none;
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #43b0ff;
+  color: #04121a;
+  font-weight: bold;
+}
+
+.hero {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.section {
+  padding: 50px 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #0f1a30;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.price-card {
+  background: #0f1a30;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.note {
+  color: #9db0bd;
+  margin-top: 15px;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #444;
+  color: #9db0bd;
+}
