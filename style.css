@@ -10,27 +10,6 @@ body {
   border: none;
   cursor: pointer;
 }
-
-.btn.primary {
-  background: #43b0ff;
-  color: #04121a;
-  font-weight: bold;
-}
-
-.hero {
-  padding: 50px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.hero img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-.section {
-  padding: 50px 20px;
 }
 
 .features-grid {
